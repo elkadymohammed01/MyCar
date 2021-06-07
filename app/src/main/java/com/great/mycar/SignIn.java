@@ -34,8 +34,8 @@ public class SignIn extends AppCompatActivity {
         password=findViewById(R.id.password);
     }
     public void SignUp(View view) {
-        startActivity(new Intent(this,SignUp.class));
         finish();
+        startActivity(new Intent(this,SignUp.class));
     }
     private void checkUser(String email, final String password){
         FirebaseDatabase.getInstance().getReference()
@@ -51,8 +51,8 @@ public class SignIn extends AppCompatActivity {
                             snapshot.child("phone").getValue().toString(),
                             snapshot.child("email").getValue().toString(),
                             snapshot.child("password").getValue().toString());
-                    startActivity(new Intent(SignIn.this,MainPage.class));
                     finish();
+                    startActivity(new Intent(SignIn.this,MainPage.class));
                 }else
                     Toast.makeText(SignIn.this,"Check Email & Password Please .", Toast.LENGTH_LONG).show();
             }

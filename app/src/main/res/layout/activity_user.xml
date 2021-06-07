@@ -94,9 +94,10 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/upvote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="13"
+                android:text="0"
                 android:textSize="15dp"
                 app:layout_constraintBottom_toTopOf="@id/textView27"
                 app:layout_constraintEnd_toEndOf="@id/textView27"
@@ -107,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="148dp"
-                android:text="Order"
+                android:text="Comments"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -116,10 +117,10 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView29"
+                android:id="@+id/comments"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="150"
+                android:text="0"
                 android:textSize="15dp"
                 app:layout_constraintBottom_toTopOf="@id/textView28"
                 app:layout_constraintEnd_toEndOf="@id/textView28"

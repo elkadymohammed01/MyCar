@@ -228,4 +228,8 @@ public class MainPage extends AppCompatActivity {
     public void Search(View view) {
         startActivity(new Intent(this,Addprodactions.class));
     }
+
+    public void profile(View view) {
+        startActivity(new Intent(this,User.class));
+    }
 }

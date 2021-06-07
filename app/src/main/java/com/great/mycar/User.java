@@ -37,7 +37,7 @@ import java.util.Date;
 public class User extends AppCompatActivity {
 
 
-    TextView user_name, email, Address;
+    TextView user_name, email, Address ,UpVote,comment;
     ImageView image;
     FloatingActionButton flag1, flag2 ,flag3;
 
@@ -59,6 +59,8 @@ public class User extends AppCompatActivity {
         flag3 = findViewById(R.id.settings);
         image = findViewById(R.id.imageView6);
         Address = findViewById(R.id.address);
+        UpVote= findViewById(R.id.upvote);
+        comment=findViewById(R.id.comments);
     }
 
     private void setItem() {
@@ -89,6 +91,34 @@ public class User extends AppCompatActivity {
 
                     }
                 });
+        FirebaseDatabase.getInstance().getReference().child("Act")
+                .child(mail.substring(0,mail.length()-4))
+                .child("UpVote").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists())
+                    UpVote.setText(snapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        FirebaseDatabase.getInstance().getReference().child("Act")
+                .child(mail.substring(0,mail.length()-4))
+                .child("Comment").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists())
+                    comment.setText(snapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     String mail, name, phone;

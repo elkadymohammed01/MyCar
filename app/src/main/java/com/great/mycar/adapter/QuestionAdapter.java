@@ -108,6 +108,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Produc
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             Integer val=Integer.parseInt(snapshot.getValue().toString());
                                             val+=1;
+                                            UpVote(position);
                                             FirebaseDatabase.getInstance().getReference().child("Question")
                                                     .child(questionList.get(position).getId()).child("love")
                                                     .setValue(val+"");
@@ -146,6 +147,31 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Produc
         User_name = Db.getData_inf()[0];
         mail = Db.getData_inf()[1];
         phone = Db.getData_inf()[2];
+    }
+    private void UpVote(final Integer id){
+        FirebaseDatabase.getInstance().getReference().child("Act")
+                .child(questionList.get(id).getEmail().substring(0,questionList.get(id).getEmail().length()-4))
+                .child("UpVote").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    FirebaseDatabase.getInstance().getReference().child("Act")
+                            .child(questionList.get(id)
+                                    .getEmail().substring(0,questionList.get(id).getEmail().length()-4))
+                            .child("UpVote").setValue((Integer.parseInt(snapshot.getValue().toString())+1)+"");
+                }else {
+                    FirebaseDatabase.getInstance().getReference().child("Act")
+                            .child(questionList.get(id).getEmail()
+                                    .substring(0,questionList.get(id).getEmail().length()-4))
+                            .child("UpVote").setValue("1");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
     @Override
     public int getItemCount() {

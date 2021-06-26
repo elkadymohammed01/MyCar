@@ -107,6 +107,7 @@
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="25dp"
         android:elevation="7dp"
+        android:onClick="maps"
         android:clickable="true"
         app:fabCustomSize="60dp"
         app:backgroundTint="@color/colorPrimary"
@@ -116,6 +117,7 @@
         app:srcCompat="@drawable/place" />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/ser"
+        android:onClick="Ser"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_gravity="bottom|center_horizontal"

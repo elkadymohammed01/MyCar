@@ -51,33 +51,30 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Produc
     @Override
     public void onBindViewHolder(@NonNull final ProductViewHolder holder, final int position) {
         final Question q=questionList.get(position);
+
         holder.name.setText(q.getName());
         holder.email.setText(q.getEmail());
         holder.details.setText(q.getDetails());
         holder.love.setText(q.getLove());
         holder.imageCar.setImageResource(R.color.gray);
         holder.comments.setText(q.getComments());
+
+        //get User Image from FireBase
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
         StorageReference islandRef = storageRef.child(q.getEmail());
-        islandRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
+        GetTrueImage GLV=new GetTrueImage(position,holder.user,context);
+        islandRef.getDownloadUrl().addOnSuccessListener(GLV);
 
-                Glide.with(context).load(uri).into(holder.user);
-            }
-        });
-
+        //get Car Image from FireBase
         FirebaseStorage sol = FirebaseStorage.getInstance();
         StorageReference rol = sol.getReference();
         StorageReference pol = rol.child(q.getId()+".png");
-        pol.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
+        GetTrueImage GTI=new GetTrueImage(position,holder.imageCar,context);
+        GetTrueImage.setLastOne(position);
+        pol.getDownloadUrl().addOnSuccessListener(GTI);
 
-                Glide.with(context).load(uri).into(holder.imageCar);
-            }
-        });
+
         holder.comments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

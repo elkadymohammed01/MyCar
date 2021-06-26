@@ -54,21 +54,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
         StorageReference islandRef = storageRef.child(productsList.get(position).getImageUrl()+".png");
-        islandRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-
-                Glide.with(context).load(uri).into(holder.carImage);
-            }
-        });
+        GetTrueImage GTI=new GetTrueImage(position,holder.carImage,context);
+        GetTrueImage.setLastOne(position);
+        islandRef.getDownloadUrl().addOnSuccessListener(GTI);
         islandRef = storageRef.child(productsList.get(position).getImageUrl()+"");
-        islandRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-
-                Glide.with(context).load(uri).into(holder.carImage);
-            }
-        });
+        islandRef.getDownloadUrl().addOnSuccessListener(GTI);
         holder.prodName.setText(productsList.get(position).getProductName());
         holder.prodQty.setText(productsList.get(position).getProductQty());
         holder.prodPrice.setText(productsList.get(position).getProductPrice());

@@ -226,10 +226,19 @@ public class MainPage extends AppCompatActivity {
     }
 
     public void Search(View view) {
-        startActivity(new Intent(this,Addprodactions.class));
+        startActivity(new Intent(this,add_ser.class));
     }
 
     public void profile(View view) {
         startActivity(new Intent(this,User.class));
+    }
+
+    public void Ser(View view) {
+
+        startActivity(new Intent(this,CarSerStagged.class));
+    }
+
+    public void maps(View view) {
+        startActivity(new Intent(this,MapsActivity.class));
     }
 }

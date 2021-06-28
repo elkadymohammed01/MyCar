@@ -13,6 +13,8 @@ public class Question {
     }
 
     public Question() {
+        love="0";
+        comments="0";
     }
 
     public String getId() {

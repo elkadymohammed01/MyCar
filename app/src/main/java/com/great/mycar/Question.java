@@ -23,30 +23,28 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.great.mycar.adapter.myDbAdapter;
 import com.great.mycar.model.ser;
 
-public class add_ser extends AppCompatActivity {
+public class Question extends AppCompatActivity {
 
-    int id=0;
-    EditText name,details,price;
-    ImageView image;
-    TextView post;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_ser);
+        setContentView(R.layout.activity_question);
         setId();
     }
+    int id=0;
+    EditText details;
+    ImageView image;
+    TextView post;
     public void setId() {
         image=findViewById(R.id.image);
-        name=findViewById(R.id.name);
+
         details=findViewById(R.id.details);
-        price=findViewById(R.id.price);
         id=0;
         post=findViewById(R.id.post);
-        editText(name,0);
         editText(details,1);
-        editText(price,2);
     }
 
     boolean show[]=new boolean[10];
@@ -75,7 +73,7 @@ public class add_ser extends AppCompatActivity {
                         id--;
                     show[index]=false;
                 }
-                if(id>=4){
+                if(id>=2){
                     post.setTextColor(getResources().getColor(R.color.blue));
                 }
                 else
@@ -126,7 +124,7 @@ public class add_ser extends AppCompatActivity {
                 if(!show[4])
                     id++;
                 show[4]=true;
-                if(id>=4){
+                if(id>=2){
                     post.setTextColor(getResources().getColor(R.color.blue));
                 }
                 Glide.with(getApplicationContext()).load(file).into(image);
@@ -156,16 +154,17 @@ public class add_ser extends AppCompatActivity {
     }
 
     public void post(View view) {
-        ser ser=new ser();
-        ser.setId(System.currentTimeMillis()+"");
-        ser.setTitle(name.getText().toString());
-        ser.setDetails(details.getText().toString());
-        ser.setPrice(price.getText().toString());
-        if(id>=4){
-            FirebaseDatabase.getInstance().getReference().child("ser")
-                    .child(ser.getId()).setValue(ser);
-            upload_file(ser.getId());
-        finish();}
+        com.great.mycar.model.Question question=new com.great.mycar.model.Question();
+        question.setId(System.currentTimeMillis()+"");
+        question.setDetails(details.getText().toString());
+        myDbAdapter Db = new myDbAdapter(getApplicationContext());
+        question.setEmail(Db.getData_inf()[1]);
+        question.setName(Db.getData_inf()[0]);
+        if(id>=2){
+            FirebaseDatabase.getInstance().getReference().child("Question")
+                    .child(question.getId()).setValue(question);
+            upload_file(question.getId());
+            finish();}
 
     }
 }

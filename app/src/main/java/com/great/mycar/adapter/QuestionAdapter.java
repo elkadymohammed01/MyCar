@@ -58,7 +58,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Produc
         holder.love.setText(q.getLove());
         holder.imageCar.setImageResource(R.color.gray);
         holder.comments.setText(q.getComments());
-
+        holder.imageCar.setImageResource(R.color.gray);
         //get User Image from FireBase
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();

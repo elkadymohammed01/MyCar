@@ -9,7 +9,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 public class GetTrueImage implements OnSuccessListener<Uri> {
     private static Integer last;
-    Integer pos;
+    Integer pos,val=4;
     ImageView image;
     Context context;
     public GetTrueImage(Integer pos, ImageView image, Context context) {
@@ -20,7 +20,7 @@ public class GetTrueImage implements OnSuccessListener<Uri> {
 
     @Override
     public void onSuccess(Uri uri) {
-        if(Math.abs(pos-last)<4)
+        if(Math.abs(pos-last)<val)
         Glide.with(context).load(uri).into(image);
     }
     public static void setLastOne(Integer l){

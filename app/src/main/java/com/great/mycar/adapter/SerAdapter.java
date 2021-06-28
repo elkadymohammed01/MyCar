@@ -1,6 +1,7 @@
 package com.great.mycar.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.great.mycar.R;
 import com.great.mycar.model.ser;
+import com.great.mycar.ser_details;
 
 import java.util.List;
 
@@ -50,6 +52,13 @@ public class SerAdapter extends RecyclerView.Adapter<SerAdapter.ProductViewHolde
             public void onSuccess(Uri uri) {
 
                 Glide.with(context).load(uri).into(holder.image);
+            }
+        });
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ser_details.ser=serList.get(position);
+                        context.startActivity(new Intent(context, ser_details.class));
             }
         });
     }

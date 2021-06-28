@@ -373,4 +373,8 @@ public class User extends AppCompatActivity {
             }
         });
     }
+
+    public void Question(View view) {
+        startActivity(new Intent(this,Question.class));
+    }
 }

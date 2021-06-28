@@ -56,14 +56,13 @@ public class MainPage extends AppCompatActivity {
 
         setProductRecycler(productCategoryList);
 
+        setDetails();
         setList();
-
         setId();
         setUserInformation();
 
     }
     private void setUserInformation(){
-        setDetails();
 
         name=findViewById(R.id.textView5);
         image=findViewById(R.id.imageView3);
@@ -185,7 +184,11 @@ public class MainPage extends AppCompatActivity {
         icons[2]=findViewById(R.id.ser);
         icons[3]=findViewById(R.id.setting);
         lottieAnimationView=findViewById(R.id.show_love);
-    }
+        if(mail.equals("Car@MyCar.com")){
+            search.setVisibility(View.VISIBLE);}
+        else
+            search.setVisibility(View.INVISIBLE);
+        }
     public void show_page_button(View view) {
         if(Show){
             ObjectAnimator.ofFloat(view, "rotation", 90f, 675f).start();
@@ -226,10 +229,11 @@ public class MainPage extends AppCompatActivity {
     }
 
     public void Search(View view) {
-        startActivity(new Intent(this,add_ser.class));
+        startActivity(new Intent(this,Addprodactions.class));
     }
 
     public void profile(View view) {
+
         startActivity(new Intent(this,User.class));
     }
 
@@ -239,6 +243,7 @@ public class MainPage extends AppCompatActivity {
     }
 
     public void maps(View view) {
+        
         startActivity(new Intent(this,MapsActivity.class));
     }
 }

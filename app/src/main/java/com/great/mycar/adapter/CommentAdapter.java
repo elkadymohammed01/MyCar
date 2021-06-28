@@ -1,6 +1,7 @@
 package com.great.mycar.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +21,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.great.mycar.MapsActivity;
 import com.great.mycar.R;
 import com.great.mycar.model.Comments;
 import com.great.mycar.model.Question;
+import com.great.mycar.ser_details;
 
 import java.util.List;
 
@@ -53,13 +56,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ProductV
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
         StorageReference islandRef = storageRef.child(comment.getEmail());
-        islandRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
+        holder.user.setImageResource(R.color.gray);
+        GetTrueImage.setLastOne(position);
+        GetTrueImage GLV=new GetTrueImage(position,holder.user,context);
+        GLV.val=8;
+        islandRef.getDownloadUrl().addOnSuccessListener(GLV);
 
-                Glide.with(context).load(uri).into(holder.user);
-            }
-        });
     }
     String mail, User_name, phone;
 
